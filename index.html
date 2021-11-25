@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8" />
+
+
+	<title>Brokerage calculator &ndash; One</title>
+
+
+
+	<meta name="description" content="One - India&#x27;s biggest stock broker offering the lowest, cheapest brokerage rates for futures and options, commodity trading, equity and mutual funds" />
+
+
+
+	<meta name="keywords" content="discount broker, discount brokerage, lowest brokerage commissions, lowest brokerage fees, indian discount brokerage, indian discount broker, cheap brokerage, discount brokerage bangalore, fixed brokerage bangalore, cheap trading, cheap commodity trading, trading terminal, futures trading, stock broker, fixed stock brokerage, cheapest brokerage, cheapest brokerage in india, online trading, online brokerage, cheap demat account, bangalore broker, commodities trading" />
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Open Graph -->
+<meta property="og:image" content="static/images/landing.png" />
+
+	<meta property="og:description" content="Comprehensive brokerage calculator to calculate how much brokerage, STT, tax etc. you have to pay on all your trades across NSE, BSE, MCX, MCX-SX" />
+
+
+	<meta property="og:image:alt" content="Brokerage calculator" />
+	<meta property="og:title" content="Brokerage calculator" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="brokerage-calculator&#x2F;" />
+
+<meta name="referrer" content="origin">
+
+	
+
+	<link href="https://fonts.googleapis.com/css?family=Inter:400,500" rel="stylesheet">
+
+	<link rel="stylesheet" href="bundle.min.css">
+
+
+</head>
+
+	<body>
+
+
+			
+				
+					<main class="content brokerage-calculator">
+    <section class="calc-header container text-center">
+        <h1>Brokerage calculator</h1>
+    </section>
+    <section class="brokerage-calc-sections container border-bottom">
+        <div>
+            <div id="mytabs" class="tabs-container">
+                <div class="section" id="equities">
+                    <h3 class="title">Equities</h3>
+                    <div class="row between">
+                        <div class="brokerage-columns column equity-calcs calc-wrapper" id="intraday-equity-calc">
+                            <h5 class="equity-head">Intraday equity</h5>
+                            <div class="row calc-inputs around">
+                                <div class="four columns brokerage-calculator-input">
+                              <label>Entry</label>
+                               <input type="number" id="callcopyentry">
+                            </div>
+                               <div class="four columns brokerage-calculator-input">
+                              <label>SL</label>
+                              <input type="number" id="callcopysl">
+                            </div>
+                              <div class="four columns brokerage-calculator-input">
+                              <label>Tgt</label>
+                              <input type="number" id="callcopytgt">
+                            </div>
+                              <div class="six columns equity-radio text-center">
+                               
+                                <input type="radio" id="long1" value="long1" name="longshort"
+                                onchange="callcopy()">
+                                <label>Long</label>
+                                </div>
+                                <div class="six columns equity-radio text-center">
+                                
+                                <input type="radio" id="short1" value="short1" name="longshort" onchange="callcopy()">
+                                <label>Short</label>
+                                </div>
+                                <div class="four columns brokerage-calculator-input">
+                                  
+                      
+                 
+                                    <label>BUY</label>
+                                    <input type="number" min="0" title="Buy Price" value="1000" oninput="cal_intra()"
+                                        class="intra intra_bp" id="callcopybuy">
+                                </div>
+                                <div class="four columns brokerage-calculator-input">
+                                    <label>SELL</label>
+                                    <input type="number" min="0" title="Sell Price" value="1100" oninput="cal_intra()"
+                                        class="intra intra_sp" id="callcopysell">
+                                </div>
+                                <div class="four columns brokerage-calculator-input">
+                                    <label>QUANTITY</label>
+                                    <input type="number" min="0" title="Quantity" value="400" oninput="cal_intra()"
+                                        class="intra intra_qty">
+                                </div>
+                            </div>
+                            <div class="row">
+                              <!--<div class="six columns equity-radio text-center">
+                                    <input id="radio11" type="radio" name="listing-market1" value="NSE"
+                                        onchange="cal_intra()" class="intra_nse intra" checked>
+                                    <label for="radio11">NSE</label>
+                                </div>
+                                <div class="six columns equity-radio text-center">
+                                    <input id="radio12" type="radio" name="listing-market1" value="BSE"
+                                        onchange="cal_intra()" class="intra_bse_option">
+                                    <label for="radio12">BSE</label>
+                                </div>-->  
+                                <div class="six columns equity-radio text-center">
+                                    <input  type="radio" value="win"
+                                        onchange="pre_cal_intra()" class="intra_nse intra" name="tradestatus">
+                                    <label>WIN</label>
+                                    </div>
+                                    <div class="six columns equity-radio text-center">
+                                        <input  type="radio"  value="loss"
+                                            onchange="pre_cal_intra()" class="intra_nse intra" name="tradestatus">
+                                        <label>LOSS</label>
+                                        </div>
+                            </div>
+                            <div style="display:none" class="row valuation-block equity-list">
+                                <label class="seven columns">Turnover</label>
+                                <span class="five columns val" id="intra_turn">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">Brokerage</label>
+                                <span class="five columns val" id="intra_brokerage">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">STT total</label>
+                                <span class="five columns val" id="intra_stt">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">Exchange txn charge</label>
+                                <span class="five columns val" id="intra_etc">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">Clearing charge</label>
+                                <span class="five columns val" id="intra_cc">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">GST</label>
+                                <span class="five columns val" id="intra_st">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">SEBI charges</label>
+                                <span class="five columns val" id="sebi">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">Stamp duty</label>
+                                <span class="five columns val" id="stamp_duty">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">Total tax and charges</label>
+                                <span class="five columns val" id="intra_total">0</span>
+                            </div>
+                            <div style="display:none" class="row equity-list valuation-block equity-list">
+                                <label class="seven columns">Points to breakeven</label>
+                                <span class="five columns val" id="intra_breakeven">0</span>
+                            </div>
+ 
+                            <div class="row net-profit" id="intra_profit">
+                                <label class="six columns">Net P&amp;L</label>
+                                <span class="six columns profit" id="intra_pnl">0</span>
+                            </div>
+                            
+                           
+                        </div>
+
+             
+         
+                        </div>
+                    </div>
+                </div>
+
+
+                     </div>
+        </div>
+    </section>
+
+
+
+
+</main>
+
+				
+			
+
+
+
+<!-- Page specific scripts -->
+<script>
+    function pre_cal_intra()
+    {
+        //callcopyswap();
+        
+        varradioLS=document.querySelector('input[name="longshort"]:checked');
+        varradioWL=document.querySelector('input[name="tradestatus"]:checked');
+        varbp=document.querySelector("#callcopybuy")
+        varsp=document.querySelector("#callcopysell")
+        vartgt=document.querySelector('#callcopytgt')
+        //alert(varradioWL.value)
+       // alert(varradioWL.value)
+       // alert(varradioWL.value)
+        if(varradioLS.value==="long1" && varradioWL.value==="win")
+        {
+         //alert("test1")
+        varbp.value=varentry.value
+        varsp.value=eval(varentry.value)+eval(vartgt.value)
+        }
+        else if(varradioLS.value==="long1" && varradioWL.value==="loss")
+        {
+           // alert("test2")
+            varbp.value=varentry.value
+            varsp.value=eval(varentry.value)-eval(varsl.value)
+        }
+        else if(varradioLS.value==="short1" && varradioWL.value==="win")
+        {
+            //alert("test3")
+            varbp.value=varentry.value
+            varsp.value=eval(varentry.value)+eval(vartgt.value)
+        }
+        else if(varradioLS.value==="short1" && varradioWL.value==="loss")
+        {
+           // alert("test4")
+            varbp.value=varentry.value
+            varsp.value=eval(varentry.value)-eval(varsl.value)
+        }
+        cal_intra()
+    }
+    function callcopy()
+    {
+        
+       varentry=document.querySelector('#callcopyentry')
+       varsl=document.querySelector('#callcopysl')
+       vartgt=document.querySelector('#callcopytgt')
+        varbp=document.querySelector("#callcopybuy")
+        varsp=document.querySelector("#callcopysell")
+        varradio=document.querySelector('input[name="longshort"]:checked').value;
+        if(varradio=="long1")
+        {
+        varbp.value=varentry.value
+        varbp.innerText=varentry.value
+
+        varsp.value=eval(varentry.value)+eval(vartgt.value)
+        varsp.innerText=eval(varentry.value)+eval(vartgt.value)
+        }
+        else
+        {
+            varsp.value=varentry.value
+        varsp.innerText=varentry.value
+
+        varbp.value=eval(varentry.value)-eval(vartgt.value)
+        varbp.innerText=eval(varentry.value)-eval(vartgt.value)
+        }
+        
+    }
+    function callcopyswap()
+    {
+      
+       varentry=document.querySelector('#callcopyentry')
+       varsl=document.querySelector('#callcopysl')
+       vartgt=document.querySelector('#callcopytgt')
+        varbp=document.querySelector("#callcopybuy")
+        varsp=document.querySelector("#callcopysell")
+
+        varradioLS=document.querySelector('input[name="longshort"]:checked').value;
+        varradioWL=document.querySelector('input[name="longshortswap"]:checked').value;
+        if(varradioLS=="long1" && varradioWL=="win")
+        {
+        varbp.value=varentry.value
+        varsp.value=eval(varentry.value)+eval(vartgt.value)
+        }
+        else if(varradioLS=="long1" && varradioWL=="loss")
+        {
+            varbp.value=varentry.value
+            varsp.value=eval(varentry.value)-eval(varsl.value)
+        }
+        else if(varradioLS=="short1" && varradioWL=="win")
+        {
+            varbp.value=eval(varentry.value)+eval(varsl.value)
+            varsp.value=varentry.value
+        }
+        else
+        {
+            varbp.value=eval(varentry.value)-eval(varsl.value)
+            varsp.value=varentry.value
+        }
+    }
+</script>
+    <script type="text/javascript" src="brokerage.js"></script>
+
+
+
+
+
+	
+</html>
